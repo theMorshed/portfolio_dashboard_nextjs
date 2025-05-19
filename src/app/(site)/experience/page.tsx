@@ -33,7 +33,7 @@ const ExperiencePage = async () => {
                                 <td className="py-4 px-6 text-sm text-gray-600 dark:text-gray-400">{experience.company}</td>
                                 <td className="py-4 px-6 text-sm text-gray-600 dark:text-gray-400">{experience.description.slice(0, 50)}...</td>
                                 <td className="py-4 px-6 text-sm text-gray-600 dark:text-gray-400">{experience.startDate}</td>
-                                <td className="py-4 px-6 text-sm text-gray-600 dark:text-gray-400">{experience.endDate}</td>                                
+                                <td className="py-4 px-6 text-sm text-gray-600 dark:text-gray-400">{experience.endDate?.substring(0, 10)}</td>                                
                                 <td className="py-4 px-6 text-sm">
                                     <Link href={`/experience/edit/${experience._id}`} passHref>
                                         <button className="px-4 py-2 bg-yellow-500 text-white rounded-md mr-2 hover:bg-yellow-400 transition-all duration-200">

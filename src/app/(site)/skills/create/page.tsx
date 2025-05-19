@@ -3,45 +3,50 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const AddExperiencePage = () => {
-    const [experience, setExperience] = useState({
-        designation: "",
-        company: "",
-        description: "",
-        startDate: "",
-        endDate: ""
+const AddSkillsPage = () => {
+    const [skills, setSkills] = useState({
+        name: "",
+        icon: "",
+        experience: "",
+        projectsLink: ""
     });
     const router = useRouter();
 
-    const handleChange = (e: any) => {
-        setExperience({ ...experience, [e.target.name]: e.target.value });
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+      
+        setSkills((prev) => ({
+          ...prev,
+          [name]: name === "experience" ? Number(value) : value,
+        }));
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/experience/create-experience`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/skills/create-skill`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(experience),
+            body: JSON.stringify(skills),
         });
+        
         if (res.ok) {
-            alert("Experience created successfully!");
+            alert("Skills created successfully!");
             // Optionally redirect after updating
-            router.push("/experience");
+            router.push("/skills");
         } else {
-            alert("Failed to create experience.");
+            alert("Failed to create skills.");
         }
 
-        router.push("/experience");
+        router.push("/skills");
     };
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
             <div className="container mx-auto px-6">
                 <h1 className="text-3xl font-semibold text-sky-800 dark:text-sky-200 text-center mb-10">
-                    Add New Experience
+                    Add New Skills
                 </h1>
 
                 <form
@@ -50,82 +55,68 @@ const AddExperiencePage = () => {
                 >
                     <div className="mb-4">
                         <label
-                            htmlFor="designation"
+                            htmlFor="name"
                             className="block text-gray-700 dark:text-gray-300 font-medium mb-2"
                         >
-                            Designation
+                            Name
                         </label>
                         <input
                             type="text"
-                            id="designation"
-                            name="designation"
+                            id="name"
+                            name="name"
                             onChange={handleChange}
                             className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200"
-                            placeholder="Enter the designation"
+                            placeholder="Enter the skill name"
                         />
                     </div>
                     <div className="mb-4">
                         <label
-                            htmlFor="company"
+                            htmlFor="icon"
                             className="block text-gray-700 dark:text-gray-300 font-medium mb-2"
                         >
-                            Company
+                            Icon
                         </label>
                         <input
                             type="text"
-                            id="company"
-                            name="company"
+                            id="icon"
+                            name="icon"
                             onChange={handleChange}
                             className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200"
-                            placeholder="Enter the company"
+                            placeholder="Enter the Icon name"
                         />
                     </div>
+
                     <div className="mb-4">
                         <label
-                            htmlFor="description"
+                            htmlFor="experience"
                             className="block text-gray-700 dark:text-gray-300 font-medium mb-2"
                         >
-                            Description
-                        </label>
-                        <textarea
-                            id="description"
-                            name="description"
-                            onChange={handleChange}
-                            className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200"
-                            placeholder="Enter the description"
-                            rows={5} // optional: adjust number of visible lines
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label
-                            htmlFor="startDate"
-                            className="block text-gray-700 dark:text-gray-300 font-medium mb-2"
-                        >
-                            Start Date
+                            Experience(In Year)
                         </label>
                         <input
-                            type="date"
-                            id="startDate"
-                            name="startDate"
+                            type="number"
+                            id="experience"
+                            name="experience"
                             onChange={handleChange}
                             className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200"
-                            placeholder="Enter the Start Date"
+                            placeholder="Enter the Experience"
                         />
                     </div>
+
                     <div className="mb-4">
                         <label
-                            htmlFor="endDate"
+                            htmlFor="projectsLink"
                             className="block text-gray-700 dark:text-gray-300 font-medium mb-2"
                         >
-                            End Date
+                            Projects Link
                         </label>
                         <input
-                            type="date"
-                            id="endDate"
-                            name="endDate"
+                            type="text"
+                            id="projectsLink"
+                            name="projectsLink"
                             onChange={handleChange}
                             className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200"
-                            placeholder="Enter the End Date"
+                            placeholder="Enter the Projects link"
                         />
                     </div>
 
@@ -134,7 +125,7 @@ const AddExperiencePage = () => {
                             type="submit"
                             className="px-6 py-3 bg-sky-800 text-white rounded-lg font-medium shadow-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500"
                         >
-                            Create Experience
+                            Create Skill
                         </button>
                     </div>
                 </form>
@@ -143,4 +134,4 @@ const AddExperiencePage = () => {
     );
 };
 
-export default AddExperiencePage;
+export default AddSkillsPage;

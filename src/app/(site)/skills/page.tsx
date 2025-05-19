@@ -34,12 +34,12 @@ const SkillsPage = async () => {
                                     <a href={skill.projectsLink} target="_blank" rel="noopener noreferrer">{skill.projectsLink}</a>
                                 </td>
                                 <td className="py-4 px-6 text-sm">
-                                    <Link href={`/experience/edit/${skill._id}`} passHref>
+                                    <Link href={`/skills/edit/${skill._id}`} passHref>
                                         <button className="px-4 py-2 bg-yellow-500 text-white rounded-md mr-2 hover:bg-yellow-400 transition-all duration-200">
                                             <Edit size={18} />
                                         </button>
                                     </Link>
-                                    <Link href={`/experience/delete/${skill._id}`} passHref>
+                                    <Link href={`/skills/delete/${skill._id}`} passHref>
                                         <button 
                                             className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500 transition-all duration-200"
                                         >
