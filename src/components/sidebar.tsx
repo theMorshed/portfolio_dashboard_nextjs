@@ -3,13 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { FileText, Folder, Settings, LogOut, MessageCircle } from "lucide-react";
+import { FileText, Folder, Settings, LogOut, MessageCircle, Briefcase, Zap } from "lucide-react";
 import { signOut } from "next-auth/react";
 
 const links = [
   { href: "/blogs", label: "Blogs", icon: FileText },
   { href: "/projects", label: "Projects", icon: Folder },
   { href: "/message", label: "Messages", icon: MessageCircle },
+  { href: "/experience", label: "Experiences", icon: Briefcase },
+  { href: "/skills", label: "Skills", icon: Zap },
   { href: "/settings", label: "Settings", icon: Settings },
 ];
 
