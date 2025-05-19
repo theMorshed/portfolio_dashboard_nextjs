@@ -1,14 +1,25 @@
 "use client"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const router = useRouter();
+
+    useEffect(() => {
+        const checkSession = async () => {
+            const session = await getSession();
+            if (session) {
+                router.push("/blogs");
+            }
+        };
+
+        checkSession();
+    });
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
