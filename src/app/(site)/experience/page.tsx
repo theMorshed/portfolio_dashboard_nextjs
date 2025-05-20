@@ -27,7 +27,7 @@ const ExperiencePage = async () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {experienceList.map((experience: any) => (
+                        {experienceList?.map((experience: any) => (
                             <tr key={experience._id} className="border-t border-gray-200 dark:border-gray-700">
                                 <td className="py-4 px-6 text-sm font-medium text-gray-800 dark:text-gray-200">{experience.designation}</td>
                                 <td className="py-4 px-6 text-sm text-gray-600 dark:text-gray-400">{experience.company}</td>

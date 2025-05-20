@@ -13,7 +13,7 @@ import OrderedList from "@tiptap/extension-ordered-list";
 import ListItem from "@tiptap/extension-list-item";
 import Heading from "@tiptap/extension-heading";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type Props = {
   content: string;
@@ -57,6 +57,13 @@ const TiptapEditor = ({ content, onChange }: Props) => {
       onChange(editor.getHTML());
     },
   });
+
+  // ⭐ Ensure content updates when it changes from parent (e.g., after fetch)
+  useEffect(() => {
+    if (editor && content !== editor.getHTML()) {
+      editor.commands.setContent(content);
+    }
+  }, [content, editor]);
   
 
   const insertImageFromUpload = useCallback(

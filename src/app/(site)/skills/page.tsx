@@ -25,7 +25,7 @@ const SkillsPage = async () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {skillsList.map((skill: any) => (
+                        {skillsList?.map((skill: any) => (
                             <tr key={skill._id} className="border-t border-gray-200 dark:border-gray-700">
                                 <td className="py-4 px-6 text-sm font-medium text-gray-800 dark:text-gray-200">{skill.name}</td>
                                 <td className="py-4 px-6 text-sm text-gray-600 dark:text-gray-400">{skill.icon}</td>

@@ -19,25 +19,6 @@ const AddNewBlogPage = () => {
         setBlog({ ...blog, [e.target.name]: e.target.value });
     };
 
-    // const handleSubmit = async (e: React.FormEvent) => {
-    //     e.preventDefault();
-    //     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blogs/create-blog`, {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify(blog),
-    //     });
-    //     if (res.ok) {
-    //         alert("Blog created successfully!");
-    //         // Optionally redirect after updating
-    //         router.push("/blogs");
-    //     } else {
-    //         alert("Failed to create blog.");
-    //     }
-
-    //     router.push("/blogs");
-    // };
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
       
@@ -90,25 +71,6 @@ const AddNewBlogPage = () => {
                         />
                     </div>
 
-                    {/* <div className="mb-4">
-                        <label
-                            htmlFor="content"
-                            className="block text-gray-700 dark:text-gray-300 font-medium mb-2"
-                        >
-                            Content
-                        </label>
-                        <div className="editor-content">
-                            <TiptapEditor content={content} onChange={setContent} />
-                        </div>                        
-                        <textarea
-                            id="content"
-                            name="content"
-                            onChange={handleChange}
-                            className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200"
-                            placeholder="Enter the blog content"
-                            rows={6}
-                        />
-                    </div> */}
                     <div className="mb-4">
                         <label
                             htmlFor="content"
