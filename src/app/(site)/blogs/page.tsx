@@ -31,7 +31,13 @@ const ManageBlogsPage = async() => {
                             <tr key={blog._id} className="border-t border-gray-200 dark:border-gray-700">
                                 <td className="py-4 px-6 text-sm font-medium text-gray-800 dark:text-gray-200">{blog.title}</td>
                                 <td className="py-4 px-6 text-sm text-gray-600 dark:text-gray-400">{blog.category}</td>
-                                <td className="py-4 px-6 text-sm text-gray-600 dark:text-gray-400">{blog.content.slice(0, 50)}...</td>
+                                {/* <td className="py-4 px-6 text-sm text-gray-600 dark:text-gray-400">{blog.content.slice(0, 50)}...</td> */}
+                                <td className="py-4 px-6 text-sm text-gray-600 dark:text-gray-400">
+                                    <div
+                                        className="prose dark:prose-invert max-w-none"
+                                        dangerouslySetInnerHTML={{ __html: blog.content.slice(0, 50) }}
+                                    />
+                                </td>
                                 <td className="py-4 px-6 text-sm">
                                     <Image
                                         src={blog.image}

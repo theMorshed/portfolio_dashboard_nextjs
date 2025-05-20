@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+import TiptapEditor from "@/components/TiptapEditor";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -11,30 +12,55 @@ const AddNewBlogPage = () => {
         image: ""
     });
     const router = useRouter();
+    const [content, setContent] = useState("");
+    console.log(content);
 
     const handleChange = (e: any) => {
         setBlog({ ...blog, [e.target.name]: e.target.value });
     };
 
+    // const handleSubmit = async (e: React.FormEvent) => {
+    //     e.preventDefault();
+    //     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blogs/create-blog`, {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify(blog),
+    //     });
+    //     if (res.ok) {
+    //         alert("Blog created successfully!");
+    //         // Optionally redirect after updating
+    //         router.push("/blogs");
+    //     } else {
+    //         alert("Failed to create blog.");
+    //     }
+
+    //     router.push("/blogs");
+    // };
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+      
+        const blogToSend = {
+          ...blog,
+          content, // inject TipTap content HTML into the blog object
+        };
+      
         const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blogs/create-blog`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(blog),
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(blogToSend),
         });
+      
         if (res.ok) {
-            alert("Blog created successfully!");
-            // Optionally redirect after updating
-            router.push("/blogs");
+          alert("Blog created successfully!");
+          router.push("/blogs");
         } else {
-            alert("Failed to create blog.");
+          alert("Failed to create blog.");
         }
-
-        router.push("/blogs");
-    };
+      };    
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
@@ -64,13 +90,16 @@ const AddNewBlogPage = () => {
                         />
                     </div>
 
-                    <div className="mb-4">
+                    {/* <div className="mb-4">
                         <label
                             htmlFor="content"
                             className="block text-gray-700 dark:text-gray-300 font-medium mb-2"
                         >
                             Content
                         </label>
+                        <div className="editor-content">
+                            <TiptapEditor content={content} onChange={setContent} />
+                        </div>                        
                         <textarea
                             id="content"
                             name="content"
@@ -79,6 +108,17 @@ const AddNewBlogPage = () => {
                             placeholder="Enter the blog content"
                             rows={6}
                         />
+                    </div> */}
+                    <div className="mb-4">
+                        <label
+                            htmlFor="content"
+                            className="block text-gray-700 dark:text-gray-300 font-medium mb-2"
+                        >
+                            Content
+                        </label>
+                        <div className="editor-content">
+                            <TiptapEditor content={content} onChange={setContent} />
+                        </div>
                     </div>
 
                     <div className="mb-4">
